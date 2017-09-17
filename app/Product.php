@@ -2,10 +2,10 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Seller;
 use App\Category;
 use App\Transaction;
-use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
