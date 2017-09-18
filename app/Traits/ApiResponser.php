@@ -2,14 +2,17 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+
 trait ApiResponser
 {
-	private successResponse($data, $code)
+	private function successResponse($data, $code)
 	{
 		return response()->json($data, $code);
 	}
 
-	protected errorResponse($message, $code)
+	protected function errorResponse($message, $code)
 	{
 		return response()->json(['error' => $message, $code => $code], $code);
 	}
