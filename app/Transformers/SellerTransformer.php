@@ -25,7 +25,7 @@ class SellerTransformer extends TransformerAbstract
         ];
     }
 
-    public function originalAttribute($index)
+    public static function originalAttribute($index)
     {
         $attributes = [
             'identifier' => 'id',
