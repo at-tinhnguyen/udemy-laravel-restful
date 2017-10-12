@@ -7,9 +7,16 @@ use App\Http\Controllers\ApiController;
 use App\User;
 use App\Mail\UserCreated;
 use Illuminate\Support\Facades\Mail;
+use App\Transformers\UserTransformer;
 
 class UserController extends ApiController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
+    }
     /**
      * Display a listing of the resource.
      *
