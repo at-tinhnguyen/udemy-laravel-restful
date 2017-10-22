@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Database\QueryException;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -86,6 +87,10 @@ class Handler extends ExceptionHandler
             if ($errorCode == 1451) {
                 return $this->errorResponse("Cannot remove this resource permanently. It is related with any other resource", 409);
             }
+        }
+
+        if ($exception instanceof TokenMismatchException) {
+            return redirect()->back()->withInput($request->input());
         }
 
         if (config('app.debug')) {
