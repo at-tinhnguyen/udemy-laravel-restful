@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Traits\ApiResponser;
 use Illuminate\Validation\ValidationException;
@@ -126,7 +127,7 @@ class Handler extends ExceptionHandler
     {
         $errors = $e->validator->errors()->getMessages();
 
-         if ($this->isFrontend($request)) {
+        if ($this->isFrontend($request)) {
             return $request->ajax() ? response()->json($erros, 422) : redirect()->back()->withInput($request->input())->withErrors($errors);
         }
 
